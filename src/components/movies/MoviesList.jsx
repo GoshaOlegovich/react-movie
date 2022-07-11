@@ -39,7 +39,6 @@ const MoviesList = (props) => {
   }
 
   const updateData = (data) => {
-    console.log('Data:' + data);
     selected(data)
   }
 
@@ -54,6 +53,7 @@ const MoviesList = (props) => {
       {data.map((item) => {
         return (
           <MoviePost
+            link={'/'+ item.id}
             id={item.id}
             key={item.id}
             index={item.id}

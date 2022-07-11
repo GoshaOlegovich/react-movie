@@ -1,11 +1,12 @@
 .movieinfo {
   display: flex;
+  height: 90vh;
   gap: 40px;
   background-color: #15191c;
   &__poster {
     z-index: 100;
     flex-shrink: 0;
-    max-width: 360px;
+
     img {
       width: 100%;
     }
@@ -34,7 +35,6 @@
     padding: 6px 40px;
     border-radius: 10px;
     text-transform: uppercase;
-    
   }
   //делегирования сотытий  ОЫ
 }
