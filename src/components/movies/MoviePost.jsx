@@ -3,13 +3,14 @@ import styles from "./assets/styles/movies.module.scss";
 
 import { IonIcon } from "@ionic/react";
 import { heart } from "ionicons/icons";
+import { Link } from "react-router-dom";
 
 export const favoriteArr = [];
 
 let likeClass = styles.like;
 
 const MoviePost = (props) => {
- // const [movieId, setMovieId] = useState('')
+  // const [movieId, setMovieId] = useState('')
   const [like, setLike] = useState(false);
 
   const likeMovie = (id) => {
@@ -26,18 +27,17 @@ const MoviePost = (props) => {
     }
   };
 
- 
-
-
   return (
-    <li
-    className={styles.movie} 
-    key={props} 
-    onClick={() => props.updateData(props.id)}
-    >
-      <div className={styles.movie__poster}>
+    <div className={styles.movie}>
+      <Link
+        to={`movie${props.link}`}
+        
+        key={props}
+        onClick={() => props.updateData(props.id)}
+        className={styles.movie__poster}
+      >
         <img src={props.posterUrl} alt={props.title} />
-      </div>
+      </Link>
       <div className={styles.movie__panel}>
         <h3 className={styles.movie__title}>{props.title}</h3>
         <IonIcon
@@ -46,7 +46,7 @@ const MoviePost = (props) => {
           className={likeClass}
         />
       </div>
-    </li>
+    </div>
   );
 };
 

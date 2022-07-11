@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { Link  } from "react-router-dom";
 import styles from "./assets/styles/movies_info.module.scss";
 
 const MovieInfo = (props) => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+  
   const imgLink = "https://image.tmdb.org/t/p/w500/";
   const apiKey = "07602740c6143bd90fdda953d093314b";
-  console.log("Selected " + props.id);
+  
 
   function getData(id) {
     fetch(
@@ -50,8 +51,10 @@ const MovieInfo = (props) => {
             Release: {data.release_date}
           </p>
         </div>
-
+      <Link to='/'>
       <button className={styles.movieinfo__button} onClick={() => console.log("close")}>Back</button>
+      </Link>
+     
       </div>
 
     </div>
