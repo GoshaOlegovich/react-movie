@@ -5,27 +5,30 @@ import { IonIcon } from "@ionic/react";
 import { heart } from "ionicons/icons";
 import { Link } from "react-router-dom";
 
-export const favoriteArr = [];
 
-let likeClass = styles.like;
+export const likeMovies = []
+
 
 const MoviePost = (props) => {
   // const [movieId, setMovieId] = useState('')
-  const [like, setLike] = useState(false);
-
+  const [like, setLike] = useState(styles.like);
+  
   const likeMovie = (id) => {
-    setLike(!like);
-
-    if (like) {
-      setLike(!like);
-      likeClass = styles.likeIt;
-      console.log(`I like it id: ${id}`);
+ 
+    if(like === styles.like) {
+      setLike(styles.likeIt)
+      likeMovies.push(
+        {
+          id: props.id,
+          title: props.title,
+          img: props.backdrop_path
+        }
+      )
+      console.log(likeMovies);
+    } else {
+      setLike(styles.like)
     }
-    if (!like) {
-      likeClass = styles.like;
-      console.log(`I DONT it id: ${id}`);
-    }
-  };
+  }
 
   return (
     <div className={styles.movie}>
@@ -43,7 +46,7 @@ const MoviePost = (props) => {
         <IonIcon
           icon={heart}
           onClick={() => likeMovie(props.id)}
-          className={likeClass}
+          className={like}
         />
       </div>
     </div>
