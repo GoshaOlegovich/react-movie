@@ -1,0 +1,47 @@
+.header {
+  //Main
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 24px;
+
+  &__logo {
+    width: 150px;
+  }
+
+  //Menu
+
+  &__menu {
+    display: flex;
+    align-items: center;
+    gap: 20px
+  }
+
+  &__link {
+    color: white;
+    font-size: 16px;
+  }
+  
+
+  //Profile
+  &__user {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    &_name {
+      font-size: 15px;
+      font-weight: bold;
+      color: white;
+    }
+    &_icon {
+      width: 30px;
+      height: 30px;
+      color: white;
+    }
+    &_btn {
+      color: white;
+      
+    }
+  }
+}
