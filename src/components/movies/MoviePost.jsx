@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styles from "./assets/styles/movies.module.scss";
 
 import { IonIcon } from "@ionic/react";
@@ -6,13 +6,15 @@ import { heart } from "ionicons/icons";
 import { Link } from "react-router-dom";
 
 
-export const likeMovies = []
 
+export const likeMovies = []
 
 const MoviePost = (props) => {
   // const [movieId, setMovieId] = useState('')
   const [like, setLike] = useState(styles.like);
   
+  const [li, setLi] = useState([]);
+
   const likeMovie = (id) => {
  
     if(like === styles.like) {
@@ -24,11 +26,25 @@ const MoviePost = (props) => {
           img: props.backdrop_path
         }
       )
-      console.log(likeMovies);
+        
     } else {
       setLike(styles.like)
     }
   }
+
+  useEffect(() => {
+    const raw = localStorage.getItem('LikedMovies') || JSON.stringify([])
+    setLi(JSON.parse(raw))
+    console.log("LII" + li);
+  }, [])
+
+
+
+  useEffect(() => {
+    localStorage.setItem('LikedMovies', JSON.stringify(likeMovies))
+    console.log("use" + likeMovies.length); 
+  }, [likeMovie])
+
 
   return (
     <div className={styles.movie}>
