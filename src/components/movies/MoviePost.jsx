@@ -1,37 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "./assets/styles/movies.module.scss";
 
-import { IonIcon } from "@ionic/react";
-import { heart } from "ionicons/icons";
 import { Link } from "react-router-dom";
+import LikeBtn from "./LikeBtn";
 
-export const favoriteArr = [];
 
-let likeClass = styles.like;
 
 const MoviePost = (props) => {
-  // const [movieId, setMovieId] = useState('')
-  const [like, setLike] = useState(false);
-
-  const likeMovie = (id) => {
-    setLike(!like);
-
-    if (like) {
-      setLike(!like);
-      likeClass = styles.likeIt;
-      console.log(`I like it id: ${id}`);
-    }
-    if (!like) {
-      likeClass = styles.like;
-      console.log(`I DONT it id: ${id}`);
-    }
-  };
+  
 
   return (
     <div className={styles.movie}>
       <Link
         to={`movie${props.link}`}
-        
         key={props}
         onClick={() => props.updateData(props.id)}
         className={styles.movie__poster}
@@ -40,11 +21,7 @@ const MoviePost = (props) => {
       </Link>
       <div className={styles.movie__panel}>
         <h3 className={styles.movie__title}>{props.title}</h3>
-        <IonIcon
-          icon={heart}
-          onClick={() => likeMovie(props.id)}
-          className={likeClass}
-        />
+        <LikeBtn id={props.id} title={props.title} img={props.backdrop_path}/>
       </div>
     </div>
   );

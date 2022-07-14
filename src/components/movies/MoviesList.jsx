@@ -3,7 +3,7 @@ import MoviePost from "./MoviePost";
 import styles from "./assets/styles/movies.module.scss";
 
 
-const imgUrl = "https://image.tmdb.org/t/p/w500";
+export const imgUrl = "https://image.tmdb.org/t/p/w500";
 const apiKey = "07602740c6143bd90fdda953d093314b";
 const popular = "api.themoviedb.org/3/movie/popular";
 const page = 1;
@@ -53,6 +53,7 @@ const MoviesList = (props) => {
       {data.map((item) => {
         return (
           <MoviePost
+            backdrop_path={item.backdrop_path}
             link={'/'+ item.id}
             id={item.id}
             key={item.id}
