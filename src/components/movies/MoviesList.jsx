@@ -7,6 +7,9 @@ export const imgUrl = "https://image.tmdb.org/t/p/w500";
 const apiKey = "07602740c6143bd90fdda953d093314b";
 const popular = "api.themoviedb.org/3/movie/popular";
 const page = 1;
+
+const resultsArr = []
+
 const MoviesList = (props) => {
 
   const [data, setData] = useState([]);
@@ -18,7 +21,20 @@ const MoviesList = (props) => {
     fetch(`https://${popular}?api_key=${apiKey}&page=${page}`)
       .then((response) => response.json())
       .then((data) => {
-        setData(data.results)
+        const results = data.results
+       
+        for (let i = 0; i < results.length; i++) {
+          let obj =
+            {
+              id: results[i].id,
+              title: results[i].original_title,
+              poster: results[i].poster_path,
+              backdrop: results[i].backdrop_path,
+              liked: false,
+            }
+            resultsArr.push(obj)
+        }
+        
       })
       .catch((error) => {
         console.error("Error", error);
@@ -50,16 +66,15 @@ const MoviesList = (props) => {
 
   return (
     <ul className={styles.movies__list}>
-      {data.map((item) => {
+      {resultsArr.map((item) => {
         return (
           <MoviePost
-            backdrop_path={item.backdrop_path}
+            item={item}
+            backdrop_path={item.backdrop}
             link={'/'+ item.id}
             id={item.id}
-            key={item.id}
-            index={item.id}
-            title={item.original_title}
-            posterUrl={imgUrl + item.poster_path}
+            title={item.title}
+            posterUrl={imgUrl + item.poster}
             updateData={updateData}
           />
         );

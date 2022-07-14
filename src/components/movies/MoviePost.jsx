@@ -7,10 +7,10 @@ import LikeBtn from "./LikeBtn";
 
 
 const MoviePost = (props) => {
-  
+  // console.log(props.item);
 
   return (
-    <div className={styles.movie}>
+    <div key={props.id} className={styles.movie}>
       <Link
         to={`movie${props.link}`}
         key={props}
@@ -21,7 +21,7 @@ const MoviePost = (props) => {
       </Link>
       <div className={styles.movie__panel}>
         <h3 className={styles.movie__title}>{props.title}</h3>
-        <LikeBtn id={props.id} title={props.title} img={props.backdrop_path}/>
+        <LikeBtn id={props.id} obj={props.item}/>
       </div>
     </div>
   );

@@ -16,7 +16,9 @@
     height: 450px;
     overflow: hidden;
     cursor: pointer;
+    transition: linear .15s;
     &:hover {
+        transform: scale(1.015);
         .movie__panel {
             bottom: 0;;
         }
