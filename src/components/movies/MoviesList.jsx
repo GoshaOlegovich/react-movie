@@ -12,7 +12,6 @@ const resultsArr = []
 
 const MoviesList = (props) => {
 
-  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,11 +21,13 @@ const MoviesList = (props) => {
       .then((response) => response.json())
       .then((data) => {
         const results = data.results
-       
+        let index = 0;
         for (let i = 0; i < results.length; i++) {
+          index++
           let obj =
             {
               id: results[i].id,
+              index: index,
               title: results[i].original_title,
               poster: results[i].poster_path,
               backdrop: results[i].backdrop_path,
