@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from "react";
 import MoviePost from "./MoviePost";
 import styles from "./assets/styles/movies.module.scss";
-
+import resultsArr from "./moviesArr.js";
 
 export const imgUrl = "https://image.tmdb.org/t/p/w500";
 const apiKey = "07602740c6143bd90fdda953d093314b";
 const popular = "api.themoviedb.org/3/movie/popular";
 const page = 1;
 
-const resultsArr = []
 
 const MoviesList = (props) => {
 
