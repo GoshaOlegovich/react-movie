@@ -10,6 +10,7 @@ const page = 1;
 
 
 const MoviesList = (props) => {
+  let localArr = JSON.parse(localStorage.getItem("moviesArr"))
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -49,6 +50,10 @@ const MoviesList = (props) => {
   useEffect(() => {
    getArray()
   }, [])
+
+  useEffect(() => {
+    resultsArr.splice(0, localArr)
+  })
 
   const selected = (data) =>{
     props.updateId(data)
