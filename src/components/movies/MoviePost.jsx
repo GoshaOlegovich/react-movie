@@ -7,7 +7,7 @@ import LikeBtn from "./LikeBtn";
 
 
 const MoviePost = (props) => {
-  console.log(props.item.liked);
+
 
   return (
     <div key={props.id} className={styles.movie}>
