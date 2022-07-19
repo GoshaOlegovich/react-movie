@@ -4,11 +4,6 @@ const menu = [
         title: 'Movies',
         link: '/'
     },
-    {   
-        id: 1,
-        title: 'Favorite',
-        link: '/favoriteMovies'
-    },
 ]
 
 export default menu

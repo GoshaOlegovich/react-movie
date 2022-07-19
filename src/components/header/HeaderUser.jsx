@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './assets/styles/header.module.scss'
+import styles from './header.module.scss'
 import { IonIcon } from "@ionic/react";
 import { personCircle, caretDownOutline } from "ionicons/icons";
 

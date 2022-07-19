@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import styles from './assets/styles/header.module.scss'
-import logo from './assets/image/logo.svg'
-import menu from './menu.js'
+import Logo from '../elements/Logo';
+import styles from './header.module.scss'
+
+
 import HeaderUser from './HeaderUser';
 
 
@@ -12,16 +13,10 @@ const Header = () => {
     
     return (
         <div className={styles.header} key='31221'>
-           
+         
             <nav className={styles.header__menu}>
-            <img className={styles.header__logo} src={logo} alt="" />
-            {
-                menu.map(item => {
-                    return (
-                        <Link key={item.id} className={styles.header__link} to={item.link}>{item.title}</Link>
-                    )
-                })
-            }
+            <Logo />
+            <Link className={styles.header__link} to='/'>Main</Link>
             </nav>
             <HeaderUser name={userName}/>
         </div>

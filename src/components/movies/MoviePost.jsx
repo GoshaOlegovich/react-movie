@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./assets/styles/movies.module.scss";
 
 import { Link } from "react-router-dom";
-import LikeBtn from "./LikeBtn";
+import LikeBtn from "../elements/buttons/LikeBtn";
 
 
 

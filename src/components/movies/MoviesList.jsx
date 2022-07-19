@@ -44,7 +44,12 @@ const MoviesList = (props) => {
       setFetching(true);
     }
   };
-
+  const selected = (data) =>{
+    props.updateId(data)
+  }
+  const updateData = (data) => {
+    selected(data)
+  }
   return (
     <ul className={styles.movies__list}>
       {movies.map((item) => {
@@ -57,7 +62,7 @@ const MoviesList = (props) => {
             key={item.id}
             title={item.title}
             posterUrl={url + item.poster_path}
-            // updateData={updateData}
+            updateData={updateData}
           />
         );
       })}

@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router";
 import MovieInfo from "./MovieInfo";
 import MoviesList from "./MoviesList";
 
-
 const Movies = () => {
   const [selectMovie, setSelectMovie] = useState("");
 
