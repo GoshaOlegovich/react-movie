@@ -1,86 +1,62 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import MoviePost from "./MoviePost";
 import styles from "./assets/styles/movies.module.scss";
-import resultsArr from "./moviesArr.js";
 
-export const imgUrl = "https://image.tmdb.org/t/p/w500";
 const apiKey = "07602740c6143bd90fdda953d093314b";
 const popular = "api.themoviedb.org/3/movie/popular";
-const page = 1;
-
+const url = "https://image.tmdb.org/t/p/w500";
 
 const MoviesList = (props) => {
-  let localArr = JSON.parse(localStorage.getItem("moviesArr"))
 
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-
-  function getArray() {
-    fetch(`https://${popular}?api_key=${apiKey}&page=${page}`)
-      .then((response) => response.json())
-      .then((data) => {
-        const results = data.results
-        let index = 0;
-        for (let i = 0; i < results.length; i++) {
-          index++
-          let obj =
-            {
-              id: results[i].id,
-              index: index,
-              title: results[i].original_title,
-              poster: results[i].poster_path,
-              backdrop: results[i].backdrop_path,
-              liked: false,
-            }
-            resultsArr.push(obj)
-        }
-        
-      })
-      .catch((error) => {
-        console.error("Error", error);
-        setError(error);
-      })
-      .finally(() => {
-        
-        setLoading(false)
-      });
-  }
-
-  useEffect(() => {
-   getArray()
-  }, [])
-
-  useEffect(() => {
-    resultsArr.splice(0, localArr)
-  })
-
-  const selected = (data) =>{
-    props.updateId(data)
-  }
-
-  const updateData = (data) => {
-    selected(data)
-  }
-
-  
+  const [movies, setMovies] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fetching, setFetching] = useState(true);
  
-  if (loading) return "Loading...";
-  if (error) return "ERROR";
+  
+  useEffect(() => {
+    if (fetching) {
+      console.log('fetching');
+      axios
+        .get(`https://${popular}?api_key=${apiKey}&page=${currentPage}`)
+        .then((response) => {
+          setMovies([...movies, ...response.data.results]); 
+          setCurrentPage((prevState) => prevState + 1);
+        })
+        .finally(() => setFetching(false))
+    }
+  }, [fetching]);
 
+  useEffect(() => {
+    document.addEventListener("scroll", scrollHandler);
+    return function () {
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
+
+  const scrollHandler = (e) => {
+    if ( 
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100 
+    ) {
+      setFetching(true);
+    }
+  };
 
   return (
     <ul className={styles.movies__list}>
-      {resultsArr.map((item) => {
+      {movies.map((item) => {
         return (
           <MoviePost
             item={item}
             backdrop_path={item.backdrop}
-            link={'/'+ item.id}
+            link={"/" + item.id}
             id={item.id}
+            key={item.id}
             title={item.title}
-            posterUrl={imgUrl + item.poster}
-            updateData={updateData}
+            posterUrl={url + item.poster_path}
+            // updateData={updateData}
           />
         );
       })}
