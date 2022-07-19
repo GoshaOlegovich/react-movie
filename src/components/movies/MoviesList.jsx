@@ -12,7 +12,7 @@ const MoviesList = (props) => {
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState(true);
- 
+
   
   useEffect(() => {
     if (fetching) {
@@ -22,10 +22,11 @@ const MoviesList = (props) => {
         .then((response) => {
           setMovies([...movies, ...response.data.results]); 
           setCurrentPage((prevState) => prevState + 1);
+
         })
         .finally(() => setFetching(false))
     }
-  }, [fetching]);
+  }, [fetching, movies, currentPage]);
 
   useEffect(() => {
     document.addEventListener("scroll", scrollHandler);
@@ -38,7 +39,7 @@ const MoviesList = (props) => {
     if ( 
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
-      100 
+      100
     ) {
       setFetching(true);
     }
