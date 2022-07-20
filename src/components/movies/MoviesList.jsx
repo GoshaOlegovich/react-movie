@@ -8,23 +8,40 @@ const popular = "api.themoviedb.org/3/movie/popular";
 const url = "https://image.tmdb.org/t/p/w500";
 
 const MoviesList = (props) => {
-
   const [movies, setMovies] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [fetching, setFetching] = useState(true);
 
-  
+  const [language, setLanguage] = useState("us-US");
+
   useEffect(() => {
     if (fetching) {
-      console.log('fetching');
       axios
-        .get(`https://${popular}?api_key=${apiKey}&page=${currentPage}`)
+        .get(
+          `https://${popular}?api_key=${apiKey}&language=${language}&page=${currentPage}`
+        )
+
         .then((response) => {
-          setMovies([...movies, ...response.data.results]); 
+          const data = response.data.results;
+          const result = [];
+          for (let i = 0; i < data.length; i++) {
+            let obj = {
+              id: data[i].id,
+              title: data[i].title,
+              poster: data[i].poster_path,
+              backdrop: data[i].backdrop_path,
+              liked: false,
+            };
+            result.push(obj);
+          }
+
+          setMovies([...movies, ...result]);
           setCurrentPage((prevState) => prevState + 1);
 
+          localStorage.setItem("AxiosMovies", JSON.stringify([...movies, ...result]));
         })
-        .finally(() => setFetching(false))
+
+        .finally(() => setFetching(false));
     }
   }, [fetching, movies, currentPage]);
 
@@ -36,7 +53,7 @@ const MoviesList = (props) => {
   }, []);
 
   const scrollHandler = (e) => {
-    if ( 
+    if (
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
       100
@@ -44,12 +61,12 @@ const MoviesList = (props) => {
       setFetching(true);
     }
   };
-  const selected = (data) =>{
-    props.updateId(data)
-  }
+  const selected = (data) => {
+    props.updateId(data);
+  };
   const updateData = (data) => {
-    selected(data)
-  }
+    selected(data);
+  };
   return (
     <ul className={styles.movies__list}>
       {movies.map((item) => {
@@ -61,7 +78,7 @@ const MoviesList = (props) => {
             id={item.id}
             key={item.id}
             title={item.title}
-            posterUrl={url + item.poster_path}
+            posterUrl={url + item.poster}
             updateData={updateData}
           />
         );

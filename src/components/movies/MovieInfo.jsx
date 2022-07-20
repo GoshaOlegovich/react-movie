@@ -13,7 +13,7 @@ const MovieInfo = (props) => {
 
   function getData(id) {
     fetch(
-      `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US)`
+      `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=ru-RU)`
     )
       .then((response) => response.json())
 

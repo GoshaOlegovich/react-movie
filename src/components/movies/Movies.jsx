@@ -4,6 +4,7 @@ import MovieInfo from "./MovieInfo";
 import MoviesList from "./MoviesList";
 
 const Movies = () => {
+  
   const [selectMovie, setSelectMovie] = useState("");
 
   const updateId = (data) => {
@@ -17,7 +18,7 @@ const Movies = () => {
           path={`movie/${selectMovie}`}
           element={<MovieInfo id={selectMovie} />}
         />
-        <Route path="/*" element={<MoviesList updateId={updateId} />} />
+        <Route path="/*" element={<MoviesList updateId={updateId}/>} />
       </Routes>
     </div>
   );
